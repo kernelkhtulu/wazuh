@@ -1,0 +1,15 @@
+<decoders>
+  <!-- Decoder for Samba JSON authentication events -->
+  <decoder name="samba-json-auth">
+    <prematch>\"record_type\":\"auth\"</prematch>
+    <decoder_parent>json</decoder_parent>
+    <order>10000</order>
+  </decoder>
+
+  <!-- Decoder for Samba plaintext authentication logs -->
+  <decoder name="samba-plaintext-auth">
+    <prematch>smbd</prematch>
+    <regex>^(?<timestamp>[^ ]+ [^ ]+) \[(?<pid>\d+)\] (?<program>\w+): auth (?<status>\w+) user=(?<user>\S+) src=(?<src_ip>\S+)</regex>
+    <order>10100</order>
+  </decoder>
+</decoders>
